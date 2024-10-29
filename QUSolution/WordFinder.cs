@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 
 public class WordFinder
 {
@@ -32,11 +29,10 @@ public class WordFinder
 			.ToDictionary(
 				word => word,
 				word => _rows.Sum(row => row.Split(word).Length - 1) +
-				        _columns.Sum(column => column.Split(word).Length - 1)
+						_columns.Sum(column => column.Split(word).Length - 1)
 			);
 
 		return wordFrequency
-			.Where(kv => kv.Value > 0)
 			.OrderByDescending(kv => kv.Value)
 			.Take(10)
 			.Select(kv => kv.Key);
