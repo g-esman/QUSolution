@@ -73,7 +73,7 @@ public class WordFinderTests
 	}
 
 	[Fact]
-	public void Find_MoreThan10WordsInMatrix_ReturnsTop10MostFrequent()
+	public void Find_MoreThan10WordsInMatrix_fiveOnMatrix_ReturnsTopFiveMostFrequent()
 	{
 		// Arrange
 		var matrix = new List<string>
@@ -83,6 +83,35 @@ public class WordFinderTests
 			"grapeorangeapple",
 			"applegrapefruit",
 			"fruitbananaapple"
+		};
+		var wordStream = new List<string>
+		{
+			"apple", "banana", "grape", "orange", "fruit", "mango", "kiwi",
+			"pineapple", "peach", "lemon", "melon", "berry"
+		};
+		var finder = new WordFinder(matrix);
+
+		// Act
+		var result = finder.Find(wordStream).ToList();
+
+		// Assert
+		Assert.Equal(5, result.Count);
+		Assert.Contains("apple", result);
+		Assert.Contains("banana", result);
+	}
+
+	[Fact]
+	public void Find_MoreThan10WordsInMatrix_ReturnsTop10MostFrequent()
+	{
+		// Arrange
+		var matrix = new List<string>
+		{
+			"appleappleapple",
+			"bananaapplegrapeberry",
+			"grapeorangeapplemango",
+			"applegrapefruitmango",
+			"fruitbananaapplemelon",
+			"kiwiberrylemonpeachpineapple"
 		};
 		var wordStream = new List<string>
 		{

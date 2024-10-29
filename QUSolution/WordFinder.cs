@@ -26,6 +26,7 @@ public class WordFinder
 	public IEnumerable<string> Find(IEnumerable<string> wordStream)
 	{
 		var wordFrequency = wordStream
+			.Distinct()
 			.ToDictionary(
 				word => word,
 				word => _rows.Sum(row => row.Split(word).Length - 1) +
@@ -33,6 +34,7 @@ public class WordFinder
 			);
 
 		return wordFrequency
+			.Where(kv => kv.Value > 0)
 			.OrderByDescending(kv => kv.Value)
 			.Take(10)
 			.Select(kv => kv.Key);
